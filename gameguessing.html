@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Guessing Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background:  linear-gradient(#e66465, #9198e5);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .contain {
+            background-color: rgba(255, 255, 255, 0.284);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #555;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            margin-bottom: 10px;
+            width: 200px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #PARA {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #eee;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        #PARA.correct {
+            color: #4caf50;
+        }
+
+        #PARA.incorrect {
+            color: #ff5252;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="contain">
+    <form action="" method="post" name="f1" onsubmit="return predict(event)">
+        <input type="text" id="c" placeholder="Enter color">
+        <br>
+        <input type="submit" value="Magic">
+    </form>
+
+    <p id="PARA"></p>
+</div>
+    
+<script>
+
+    
+    function predict(event) 
+    {
+        event.preventDefault();
+
+        var game = ["red", "green", "black", "yellow"];
+        
+        var r = Math.floor(Math.random() * 4);
+        
+        var c = document.getElementById("c").value;
+        
+        var para = document.getElementById("PARA");
+
+        if (c.toLowerCase() === game[r]) 
+        {
+            para.innerText = `Winner, your color is ${c} == ${game[r]}!!! WIN !!!`;
+        
+            para.className = 'correct';
+        } 
+        else {
+            para.innerText = `Try again, your color is ${c}. Correct color: ${game[r]}`;
+            para.className = 'incorrect';
+        }
+
+        para.style.opacity = 1;
+
+        setTimeout(() => {
+            para.style.opacity = 0;
+        }, 1500);
+
+        document.getElementById("c").value = '';
+    }
+
+</script>
+
+</body>
+</html>
